@@ -1,0 +1,11 @@
+{
+  "name": "KAI · Zahnputzzeit",
+  "short_name": "KAI",
+  "description": "Zahnputzzeit nach der KAI-Methode",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fafaf6",
+  "theme_color": "#fafaf6",
+  "lang": "de"
+}
