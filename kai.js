@@ -24,7 +24,7 @@ if(typeof window.addEventListener==='function'){
  keepScreenAwake();
 }
 function persist(){try{localStorage.setItem(KEY,String(totalSeconds));$('storage-message').textContent=''}catch{$('storage-message').textContent='Die Putzzeit kann gerade nicht dauerhaft gespeichert werden.'}}
-function rebuild(){seconds=totalSeconds/12;stages=groups.flatMap((g,phase)=>quadrants.map((title,q)=>({phase,q,title,direction:phase===0?'':q%2?'Von der Mitte nach links hinten':'Von rechts hinten zur Mitte',src:'assets/'+g.prefix+'-'+files[q]+'.png',alt:g.name+' Â· '+title})))}
+function rebuild(){seconds=totalSeconds/12;stages=groups.flatMap((g,phase)=>quadrants.map((title,q)=>({phase,q,title,direction:phase===0?'':q%2?'Von der Mitte nach links hinten':'Von rechts hinten zur Mitte',src:'./'+g.prefix+'-'+files[q]+'.png',alt:g.name+' Â· '+title})))}
 function format(s){s=Math.max(0,Math.ceil(s-1e-7));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
 // Keep all decoded frames resident; draw only when the quadrant changes.
 const decodedFrames=new Map();
