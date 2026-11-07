@@ -1,0 +1,31 @@
+name: Import original KAI icons
+on:
+  push:
+    paths:
+      - '.github/workflows/import-kai-icons.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import-icons:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download original icon assets
+        run: |
+          set -euo pipefail
+          mkdir -p assets
+          base="https://kai-zahnputzzeit.xg5cspz7ft.chatgpt.site/assets"
+          for name in apple-touch-icon.png icon-192.png icon-512.png favicon-32.png; do
+            curl --fail --location --retry 3 --silent --show-error "$base/$name" -o "assets/$name"
+            file "assets/$name" | grep -q 'PNG image data'
+          done
+      - name: Commit icon assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/apple-touch-icon.png assets/icon-192.png assets/icon-512.png assets/favicon-32.png
+          if ! git diff --cached --quiet; then
+            git commit -m "Import original KAI icon images"
+            git push
+          fi
